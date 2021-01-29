@@ -21,7 +21,6 @@ export const blockSettingsScreens = {
 	settings: 'Settings',
 	color: 'Color',
 	linkPicker: 'linkPicker',
-	settingChild: 'SettingChild',
 };
 
 function BottomSheetSettings( {
@@ -47,7 +46,7 @@ function BottomSheetSettings( {
 				</BottomSheet.NavigationScreen>
 
 				<BottomSheet.NavigationScreen
-					name={ blockSettingsScreens.settingChild }
+					name={ InspectorControlsChild.screenName }
 				>
 					<InspectorControlsChild.Slot />
 				</BottomSheet.NavigationScreen>

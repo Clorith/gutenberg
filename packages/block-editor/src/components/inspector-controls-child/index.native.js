@@ -1,67 +1,22 @@
 /**
- * External dependencies
- */
-import { View, SafeAreaView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-/**
  * WordPress dependencies
  */
-import { Children, useState } from '@wordpress/element';
-import {
-	createSlotFill,
-	BottomSheetConsumer,
-	NavigationHeader,
-} from '@wordpress/components';
-import { Icon, chevronRight } from '@wordpress/icons';
+import { Children } from '@wordpress/element';
+import { createSlotFill, BottomSheetConsumer } from '@wordpress/components';
 
 const { Fill, Slot } = createSlotFill( 'InspectorControlsChild' );
 
-const BottomSheetWrapperView = ( { children, label, onCancel } ) => {
-	return (
-		<SafeAreaView>
-			<NavigationHeader screen={ label } leftButtonOnPress={ onCancel } />
-			<View>{ children }</View>
-		</SafeAreaView>
-	);
-};
-
-const FillWithSettingsButton = ( { children, label, button } ) => {
-	const [ showBottomSheet, setShowBottomSheet ] = useState( false );
-
-	const navigation = useNavigation();
-
-	const onPressLabel = () => {
-		setShowBottomSheet( true );
-		navigation.navigate( 'SettingChild' );
-	};
-
-	const onCancel = () => {
-		navigation.goBack();
-		setShowBottomSheet( false );
-	};
-
+const FillWithSettingsButton = ( { children, button, showSheet } ) => {
 	return (
 		<>
 			<Fill>
-				{ showBottomSheet && (
+				{ showSheet && (
 					<BottomSheetConsumer>
-						{ () => (
-							<BottomSheetWrapperView
-								onCancel={ onCancel }
-								label={ label }
-							>
-								{ children }
-							</BottomSheetWrapperView>
-						) }
+						{ () => children }
 					</BottomSheetConsumer>
 				) }
 			</Fill>
-			{ Children.count( children ) > 0 && (
-				<button.type { ...button.props } onPress={ onPressLabel }>
-					<Icon icon={ chevronRight }></Icon>
-				</button.type>
-			) }
+			{ Children.count( children ) > 0 && button }
 		</>
 	);
 };
@@ -69,5 +24,6 @@ const FillWithSettingsButton = ( { children, label, button } ) => {
 const InspectorControlsChild = FillWithSettingsButton;
 
 InspectorControlsChild.Slot = Slot;
+InspectorControlsChild.screenName = 'SettingSubpage';
 
 export default InspectorControlsChild;

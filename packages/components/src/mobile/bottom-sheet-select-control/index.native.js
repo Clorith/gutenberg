@@ -1,13 +1,21 @@
 /**
+ * External dependencies
+ */
+import { SafeAreaView, View } from 'react-native';
+
+/**
  * WordPress dependencies
  */
 import { InspectorControlsChild } from '@wordpress/block-editor';
-import { check } from '@wordpress/icons';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from '@wordpress/element';
+import { Icon, chevronRight, check } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import Cell from '../bottom-sheet/cell';
+import NavigationHeader from '../bottom-sheet/navigation-header';
 
 const BottomSheetSelectControl = ( {
 	label,
@@ -15,8 +23,12 @@ const BottomSheetSelectControl = ( {
 	onChange,
 	value: selectedValue,
 } ) => {
+	const [ showSubSheet, setShowSubSheet ] = useState( false );
+	const navigation = useNavigation();
+
 	const onChangeValue = ( value ) => {
 		return () => {
+			goBack();
 			onChange( value );
 		};
 	};
@@ -24,6 +36,16 @@ const BottomSheetSelectControl = ( {
 	const selectedOption = items.find(
 		( option ) => option.value === selectedValue
 	);
+
+	const goBack = () => {
+		setShowSubSheet( false );
+		navigation.goBack();
+	};
+
+	const openSubSheet = () => {
+		navigation.navigate( InspectorControlsChild.screenName );
+		setShowSubSheet( true );
+	};
 
 	return (
 		<InspectorControlsChild
@@ -33,19 +55,35 @@ const BottomSheetSelectControl = ( {
 					label={ label }
 					separatorType="none"
 					value={ selectedOption.label }
-				/>
+					onPress={ openSubSheet }
+				>
+					<Icon icon={ chevronRight }></Icon>
+				</Cell>
 			}
+			showSheet={ showSubSheet }
 		>
-			{ items.map( ( item, index ) => (
-				<Cell
-					label={ item.label }
-					onPress={ onChangeValue( item.value ) }
-					leftAlign={ true }
-					key={ index }
-					style
-					icon={ item.value === selectedValue ? check : null }
+			<SafeAreaView>
+				<NavigationHeader
+					screen={ label }
+					leftButtonOnPress={ goBack }
 				/>
-			) ) }
+				<View paddingHorizontal={ 10 }>
+					{ items.map( ( item, index ) => (
+						<Cell
+							customActionButton
+							separatorType="none"
+							label={ item.label }
+							onPress={ onChangeValue( item.value ) }
+							leftAlign={ true }
+							key={ index }
+						>
+							{ item.value === selectedValue && (
+								<Icon icon={ check }></Icon>
+							) }
+						</Cell>
+					) ) }
+				</View>
+			</SafeAreaView>
 		</InspectorControlsChild>
 	);
 };
