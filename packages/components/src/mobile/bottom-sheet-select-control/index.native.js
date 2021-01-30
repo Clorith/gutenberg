@@ -66,7 +66,7 @@ const BottomSheetSelectControl = ( {
 					screen={ label }
 					leftButtonOnPress={ goBack }
 				/>
-				<View paddingHorizontal={ 10 }>
+				<View paddingHorizontal={ 16 }>
 					{ items.map( ( item, index ) => (
 						<Cell
 							customActionButton
