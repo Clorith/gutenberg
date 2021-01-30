@@ -1,8 +1,7 @@
 # BottomSheetSelectControl
 
 `BottomSheetSelectControl` allows users to select an item from a single-option menu just like [`SelectControl`](/packages/components/src/select-control/readme.md), 
-Howover instead of opening up the selection in a modal the selection opens up in a BottomSheet.
-## Table of contents
+However, instead of opening up the selection in a modal, the selection opens up in a BottomSheet.
 
 ### Usage
 

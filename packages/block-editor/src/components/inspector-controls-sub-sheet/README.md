@@ -1,3 +1,10 @@
+# InspectorControlsSubSheet
+
+Inspector Controls Sub Sheet allows for adding controls inside the React Native bottom sheet settings. 
+
+### Usage
+
+```jsx
 /**
  * External dependencies
  */
@@ -9,7 +16,7 @@ import { SafeAreaView, View } from 'react-native';
 import { InspectorControlsSubSheet } from '@wordpress/block-editor';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from '@wordpress/element';
-import { Icon, chevronRight, check } from '@wordpress/icons';
+import { Icon, chevronRight } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -17,25 +24,9 @@ import { Icon, chevronRight, check } from '@wordpress/icons';
 import Cell from '../bottom-sheet/cell';
 import NavigationHeader from '../bottom-sheet/navigation-header';
 
-const BottomSheetSelectControl = ( {
-	label,
-	options: items,
-	onChange,
-	value: selectedValue,
-} ) => {
+const ExampleControl = () => {
 	const [ showSubSheet, setShowSubSheet ] = useState( false );
 	const navigation = useNavigation();
-
-	const onChangeValue = ( value ) => {
-		return () => {
-			goBack();
-			onChange( value );
-		};
-	};
-
-	const selectedOption = items.find(
-		( option ) => option.value === selectedValue
-	);
 
 	const goBack = () => {
 		setShowSubSheet( false );
@@ -51,9 +42,8 @@ const BottomSheetSelectControl = ( {
 		<InspectorControlsSubSheet
 			button={
 				<Cell
-					label={ label }
+					label={ 'Howdy' }
 					separatorType="none"
-					value={ selectedOption.label }
 					onPress={ openSubSheet }
 				>
 					<Icon icon={ chevronRight }></Icon>
@@ -63,28 +53,42 @@ const BottomSheetSelectControl = ( {
 		>
 			<SafeAreaView>
 				<NavigationHeader
-					screen={ label }
+					screen={ 'Howdy' }
 					leftButtonOnPress={ goBack }
 				/>
-				<View paddingHorizontal={ 10 }>
-					{ items.map( ( item, index ) => (
-						<Cell
-							customActionButton
-							separatorType="none"
-							label={ item.label }
-							onPress={ onChangeValue( item.value ) }
-							leftAlign={ true }
-							key={ index }
-						>
-							{ item.value === selectedValue && (
-								<Icon icon={ check }></Icon>
-							) }
-						</Cell>
-					) ) }
+				<View paddingHorizontal={ 16 }>
+					<Text>{ 'World' }</Text>
 				</View>
 			</SafeAreaView>
 		</InspectorControlsSubSheet>
 	);
 };
 
-export default BottomSheetSelectControl;
+export default ExampleControl;
+```
+
+### Props
+
+#### showSheet
+
+Wether to show or hide the Bottom Sheet content. 
+
+-   Type: `Boolean`
+-   Required: Yes
+
+#### button
+
+Is used for clicking to display the Bottom Sheet.
+
+-   Type: `ReactComponent`
+-   Required: Yes
+
+
+#### isFullScreen
+
+Is used for clicking to display the Bottom Sheet.
+
+-   Type: `Boolean`
+-   Required: Yes
+
+See `BottomSheetSelectControl` as an example.
