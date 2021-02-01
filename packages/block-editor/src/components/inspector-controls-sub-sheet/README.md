@@ -71,14 +71,14 @@ export default ExampleControl;
 
 #### showSheet
 
-Wether to show or hide the Bottom Sheet content. 
+Controls the Sub Sheet content visibility.
 
 -   Type: `Boolean`
 -   Required: Yes
 
-#### button
+#### navigationButton
 
-Is used for clicking to display the Bottom Sheet.
+UI rendered to allow navigating to the Sub Sheet when tapped.
 
 -   Type: `ReactComponent`
 -   Required: Yes
@@ -86,7 +86,7 @@ Is used for clicking to display the Bottom Sheet.
 
 #### isFullScreen
 
-Is used for clicking to display the Bottom Sheet.
+Toggles the Sub Sheet height filling the entire device height.
 
 -   Type: `Boolean`
 -   Required: Yes
