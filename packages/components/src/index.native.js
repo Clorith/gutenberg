@@ -65,6 +65,8 @@ export {
 	BottomSheetProvider,
 	BottomSheetContext,
 } from './mobile/bottom-sheet/bottom-sheet-context';
+export { default as BottomSheetSelectControl } from './mobile/bottom-sheet-select-control';
+export { default as NavigationHeader } from './mobile/bottom-sheet/navigation-header';
 export { default as HTMLTextInput } from './mobile/html-text-input';
 export { default as KeyboardAvoidingView } from './mobile/keyboard-avoiding-view';
 export { default as KeyboardAwareFlatList } from './mobile/keyboard-aware-flat-list';

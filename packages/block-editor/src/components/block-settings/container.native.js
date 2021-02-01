@@ -1,7 +1,10 @@
 /**
  * WordPress dependencies
  */
-import { InspectorControls } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	InspectorControlsChild,
+} from '@wordpress/block-editor';
 import {
 	BottomSheet,
 	ColorSettings,
@@ -18,6 +21,7 @@ export const blockSettingsScreens = {
 	settings: 'Settings',
 	color: 'Color',
 	linkPicker: 'linkPicker',
+	settingChild: 'SettingChild',
 };
 
 function BottomSheetSettings( {
@@ -41,6 +45,13 @@ function BottomSheetSettings( {
 				>
 					<InspectorControls.Slot />
 				</BottomSheet.NavigationScreen>
+
+				<BottomSheet.NavigationScreen
+					name={ blockSettingsScreens.settingChild }
+				>
+					<InspectorControlsChild.Slot />
+				</BottomSheet.NavigationScreen>
+
 				<BottomSheet.NavigationScreen
 					name={ blockSettingsScreens.color }
 				>
